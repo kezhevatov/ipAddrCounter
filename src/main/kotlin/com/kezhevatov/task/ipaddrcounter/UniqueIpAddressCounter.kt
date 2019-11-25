@@ -2,7 +2,7 @@ package com.kezhevatov.task.ipaddrcounter
 
 class UniqueIpAddressCounter {
 
-    private val subArrayLength = 256 * 256 * 256
+    private val subArrayLength = (256 * 256 * 256) / 32
     private val mainArray = arrayOfNulls<IntArray>(256)
     private var count: Long = 0
 
@@ -24,7 +24,7 @@ class UniqueIpAddressCounter {
             mainArray[ip1] = IntArray(subArrayLength)
         }
 
-        val vectorPositionInSubArray = (ip2 shl 16) + (ip3 shl 8) + ip4           // ip2 * 256 * 256 + ip3 * 256 + ip4
+        val vectorPositionInSubArray = (ip2 shl 16) + (ip3 shl 8) + ip4          // ip2 * 256 * 256 + ip3 * 256 + ip4
         val bitVectorPosition = vectorPositionInSubArray ushr 5                  // vectorPositionInSubArray / 32
         val bitPosition = vectorPositionInSubArray - (bitVectorPosition shl 5)   // vectorPositionInSubArray % 32
 
